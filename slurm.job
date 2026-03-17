@@ -20,32 +20,32 @@ module avail Anaconda3
 module spider Anaconda3
 
 
-# module load Anaconda3/2023.07-2
+module load Anaconda3/2023.07-2
 # module load Anaconda3/2024.02-1
 # module load Anaconda3/2025.06-1
-# module load CUDA/12.1.1
-# eval "$(conda shell.bash hook)"
+module load CUDA/12.1.1
+eval "$(conda shell.bash hook)"
 
-# conda create --name water_splatting -y python=3.8
-# conda activate water_splatting
-# python -m pip install --upgrade pip
+conda create --name water_splatting -y python=3.8
+conda activate water_splatting
+python -m pip install --upgrade pip
 
-# # present working directory
-# echo "Current working directory: $(pwd)"
+# present working directory
+echo "Current working directory: $(pwd)"
 
-# # Install PyTorch
-# pip uninstall torch torchvision functorch tinycudann
-# pip install torch==2.1.2+cu118 torchvision==0.16.2+cu118 --extra-index-url https://download.pytorch.org/whl/cu118
+# Install PyTorch
+pip uninstall torch torchvision functorch tinycudann
+pip install torch==2.1.2+cu118 torchvision==0.16.2+cu118 --extra-index-url https://download.pytorch.org/whl/cu118
 
-# # Install cuda-toolkit with conda
-# conda install -c "nvidia/label/cuda-11.8.0" cuda-toolkit
+# Install cuda-toolkit with conda
+conda install -c "nvidia/label/cuda-11.8.0" cuda-toolkit
 
-# # Install tiny-cuda-nn
-# pip install ninja git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch
+# Install tiny-cuda-nn
+pip install ninja git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch
 
-# # Install nerfstudio
-# pip install nerfstudio==1.1.4
-# ns-install-cli
+# Install nerfstudio
+pip install nerfstudio==1.1.4
+ns-install-cli
 
 echo "========================================"
 echo "Job finished at: $(date)"
