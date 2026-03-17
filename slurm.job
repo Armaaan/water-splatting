@@ -32,8 +32,10 @@ python -m pip install --upgrade pip
 echo "Current working directory: $(pwd)"
 
 # Install PyTorch
-pip uninstall torch torchvision functorch tinycudann
-pip install torch==2.1.2+cu118 torchvision==0.16.2+cu118 --extra-index-url https://download.pytorch.org/whl/cu118
+pip uninstall -y torch torchvision torchaudio functorch tinycudann || true
+pip cache purge
+pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 \
+  --index-url https://download.pytorch.org/whl/cu121
 
 # Install cuda-toolkit with conda
 conda install -c "nvidia/label/cuda-11.8.0" cuda-toolkit
