@@ -32,8 +32,9 @@ set -u
 
 
 # Paths
-SOURCE_PATH="/home/arua/projects/3dgs/datasets/SeathruNeRF_dataset/IUI3-RedSea"
-UNDISTORTED_PATH="${SOURCE_PATH}/undistorted_seathrunerf_dataset/IUI3-RedSea"
+SOURCE_PATH="/home/arua/projects/3dgs/datasets"
+DATASET_NAME="IUI3-RedSea"
+UNDISTORTED_PATH="${SOURCE_PATH}/undistorted_seathrunerf_dataset/${DATASET_NAME}"
 
 echo "output_path: $UNDISTORTED_PATH"
 echo "input_path: ${SOURCE_PATH}/SeathruNeRF_dataset/${DATASET_NAME}/Images_wb"
