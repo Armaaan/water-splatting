@@ -53,7 +53,7 @@ ns-train water-splatting \
     --vis viewer+wandb \
     colmap \
     --downscale-factor 1 \
-    --colmap-path sparse/0 \
+    --colmap-path sparse \
     --data "$UNDISTORTED_PATH" \
     --images-path images
 
