@@ -21,30 +21,30 @@ module load CUDA/12.1.1
 eval "$(conda shell.bash hook)"
 
 # conda create --name water_splatting -y python=3.8
-set +u  # Temporarily disable strict variable checking
+set +u
 conda activate water_splatting
-set -u  # Re-enable strict variable checking
-# ---------------------------------
-# python -m pip install --upgrade pip
+set -u
 
-# # present working directory
-# echo "Current working directory: $(pwd)"
+python -m pip install --upgrade pip
 
-# # Install PyTorch
-# pip uninstall -y torch torchvision torchaudio functorch tinycudann || true
-# pip cache purge
-# pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 \
-#   --index-url https://download.pytorch.org/whl/cu121
+# present working directory
+echo "Current working directory: $(pwd)"
 
-# # Install cuda-toolkit with conda
-# conda install -c "nvidia/label/cuda-11.8.0" cuda-toolkit
+# Install PyTorch
+pip uninstall -y torch torchvision torchaudio functorch tinycudann || true
+pip cache purge
+pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 \
+  --index-url https://download.pytorch.org/whl/cu121
 
-# # Install tiny-cuda-nn
-# pip install ninja git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch
+# Install cuda-toolkit with conda
+conda install -c "nvidia/label/cuda-11.8.0" cuda-toolkit
 
-# # Install nerfstudio
-# pip install nerfstudio==1.1.4
-# ns-install-cli
+# Install tiny-cuda-nn
+pip install ninja git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch
+
+# Install nerfstudio
+pip install nerfstudio==1.1.4
+ns-install-cli
 
 
 git submodule init
