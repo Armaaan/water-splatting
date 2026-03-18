@@ -25,10 +25,10 @@ conda activate water_splatting
 set -u
 
 
-conda tos accept --channel https://repo.anaconda.com/pkgs/main
-conda tos accept --channel https://repo.anaconda.com/pkgs/r
+# conda tos accept --channel https://repo.anaconda.com/pkgs/main
+# conda tos accept --channel https://repo.anaconda.com/pkgs/r
 
-conda install -c conda-forge colmap -y
+# conda install -c conda-forge colmap -y
 
 
 # Paths
@@ -44,14 +44,14 @@ colmap image_undistorter \
     --output_type COLMAP
 
 
-echo "Starting Training..."
-ns-train water-splatting \
-    --vis viewer+wandb \
-    colmap \
-    --downscale-factor 1 \
-    --colmap-path sparse/0 \
-    --data "$UNDISTORTED_PATH" \
-    --images-path images
+# echo "Starting Training..."
+# ns-train water-splatting \
+#     --vis viewer+wandb \
+#     colmap \
+#     --downscale-factor 1 \
+#     --colmap-path sparse/0 \
+#     --data "$UNDISTORTED_PATH" \
+#     --images-path images
 
 echo "========================================"
 echo "Job finished at: $(date)"
