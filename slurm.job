@@ -20,28 +20,32 @@ module load Anaconda3/2024.06-1
 module load CUDA/12.1.1
 eval "$(conda shell.bash hook)"
 
-conda create --name water_splatting -y python=3.8
+# conda create --name water_splatting -y python=3.8
 conda activate water_splatting
-python -m pip install --upgrade pip
+# python -m pip install --upgrade pip
 
-# present working directory
-echo "Current working directory: $(pwd)"
+# # present working directory
+# echo "Current working directory: $(pwd)"
 
-# Install PyTorch
-pip uninstall -y torch torchvision torchaudio functorch tinycudann || true
-pip cache purge
-pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 \
-  --index-url https://download.pytorch.org/whl/cu121
+# # Install PyTorch
+# pip uninstall -y torch torchvision torchaudio functorch tinycudann || true
+# pip cache purge
+# pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 \
+#   --index-url https://download.pytorch.org/whl/cu121
 
-# Install cuda-toolkit with conda
-conda install -c "nvidia/label/cuda-11.8.0" cuda-toolkit
+# # Install cuda-toolkit with conda
+# conda install -c "nvidia/label/cuda-11.8.0" cuda-toolkit
 
-# Install tiny-cuda-nn
-pip install ninja git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch
+# # Install tiny-cuda-nn
+# pip install ninja git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch
 
-# Install nerfstudio
-pip install nerfstudio==1.1.4
-ns-install-cli
+# # Install nerfstudio
+# pip install nerfstudio==1.1.4
+# ns-install-cli
+
+git submodule init
+git submodule update --recursive
+pip install --no-use-pep517 -e .
 
 echo "========================================"
 echo "Job finished at: $(date)"

@@ -1,0 +1,58 @@
+#!/bin/bash
+#SBATCH --job-name=water-splatting-job
+#SBATCH --output=logs/water-splatting_%j.out
+#SBATCH --cpus-per-task=8
+#SBATCH --gres=gpu:a30:1
+#SBATCH --time=24:00:00
+#SBATCH --partition=acltr
+
+
+echo "========================================"
+echo "Job started at: $(date)"
+echo "Host: $(hostname)"
+echo "Job ID: ${SLURM_JOB_ID:-no_slurm_job_id}"
+echo "========================================"
+
+set -euo pipefail
+
+module purge
+module load Anaconda3
+module load CUDA/12.1.1
+
+set +u
+eval "$(conda shell.bash hook)"
+conda activate water_splatting
+set -u
+
+
+conda tos accept --channel https://repo.anaconda.com/pkgs/main
+conda tos accept --channel https://repo.anaconda.com/pkgs/r
+
+conda install -c conda-forge colmap -y
+
+
+# Paths
+SOURCE_PATH="/home/arua/projects/3dgs/datasets"
+DATASET_NAME="IUI3-RedSea"
+UNDISTORTED_PATH="${SOURCE_PATH}/undistorted_seathrunerf_dataset/${DATASET_NAME}"
+
+echo "Running COLMAP image_undistorter..."
+colmap image_undistorter \
+    --image_path "${SOURCE_PATH}/SeathruNeRF_dataset/${DATASET_NAME}/images_wb" \
+    --input_path "${SOURCE_PATH}/SeathruNeRF_dataset/${DATASET_NAME}/colmap/sparse/0" \
+    --output_path "$UNDISTORTED_PATH" \
+    --output_type COLMAP
+
+
+echo "Starting Training..."
+ns-train water-splatting \
+    --vis viewer+wandb \
+    colmap \
+    --downscale-factor 1 \
+    --colmap-path sparse/0 \
+    --data "$UNDISTORTED_PATH" \
+    --images-path images
+
+echo "========================================"
+echo "Job finished at: $(date)"
+echo "========================================"
