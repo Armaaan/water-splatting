@@ -40,22 +40,22 @@ echo "output_path: $UNDISTORTED_PATH"
 echo "input_path: ${SOURCE_PATH}/SeathruNeRF_dataset/${DATASET_NAME}/Images_wb"
 echo "colmap_path: ${SOURCE_PATH}/SeathruNeRF_dataset/${DATASET_NAME}/sparse/0"
 
-echo "Running COLMAP image_undistorter..."
-colmap image_undistorter \
-    --image_path "${SOURCE_PATH}/SeathruNeRF_dataset/${DATASET_NAME}/Images_wb" \
-    --input_path "${SOURCE_PATH}/SeathruNeRF_dataset/${DATASET_NAME}/sparse/0" \
-    --output_path "$UNDISTORTED_PATH" \
-    --output_type COLMAP
+# echo "Running COLMAP image_undistorter..."
+# colmap image_undistorter \
+#     --image_path "${SOURCE_PATH}/SeathruNeRF_dataset/${DATASET_NAME}/Images_wb" \
+#     --input_path "${SOURCE_PATH}/SeathruNeRF_dataset/${DATASET_NAME}/sparse/0" \
+#     --output_path "$UNDISTORTED_PATH" \
+#     --output_type COLMAP
 
 
-# echo "Starting Training..."
-# ns-train water-splatting \
-#     --vis viewer+wandb \
-#     colmap \
-#     --downscale-factor 1 \
-#     --colmap-path sparse/0 \
-#     --data "$UNDISTORTED_PATH" \
-#     --images-path images
+echo "Starting Training..."
+ns-train water-splatting \
+    --vis viewer+wandb \
+    colmap \
+    --downscale-factor 1 \
+    --colmap-path sparse/0 \
+    --data "$UNDISTORTED_PATH" \
+    --images-path images
 
 echo "========================================"
 echo "Job finished at: $(date)"
