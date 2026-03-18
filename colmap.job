@@ -38,7 +38,7 @@ UNDISTORTED_PATH="${SOURCE_PATH}/undistorted_seathrunerf_dataset/${DATASET_NAME}
 
 echo "Running COLMAP image_undistorter..."
 colmap image_undistorter \
-    --image_path "${SOURCE_PATH}/SeathruNeRF_dataset/${DATASET_NAME}/images_wb" \
+    --image_path "${SOURCE_PATH}/SeathruNeRF_dataset/${DATASET_NAME}/Images_wb" \
     --input_path "${SOURCE_PATH}/SeathruNeRF_dataset/${DATASET_NAME}/colmap/sparse/0" \
     --output_path "$UNDISTORTED_PATH" \
     --output_type COLMAP
