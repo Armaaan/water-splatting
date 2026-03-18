@@ -33,35 +33,35 @@ set -u
 
 # Paths
 SOURCE_PATH="/home/arua/projects/3dgs/datasets"
-DATASET_NAME="IUI3-RedSea"
-UNDISTORTED_PATH="${SOURCE_PATH}/undistorted_seathrunerf_dataset/${DATASET_NAME}"
+DATASET_NAME="Curasao"
+UNDISTORTED_PATH="${SOURCE_PATH}/undistorted_seathrunerf_dataset/water_splatting/${DATASET_NAME}"
 
 echo "output_path: $UNDISTORTED_PATH"
 echo "input_path: ${SOURCE_PATH}/SeathruNeRF_dataset/${DATASET_NAME}/Images_wb"
 echo "colmap_path: ${SOURCE_PATH}/SeathruNeRF_dataset/${DATASET_NAME}/sparse/0"
 
-# echo "Running COLMAP image_undistorter..."
-# colmap image_undistorter \
-#     --image_path "${SOURCE_PATH}/SeathruNeRF_dataset/${DATASET_NAME}/Images_wb" \
-#     --input_path "${SOURCE_PATH}/SeathruNeRF_dataset/${DATASET_NAME}/sparse/0" \
-#     --output_path "$UNDISTORTED_PATH" \
-#     --output_type COLMAP
+echo "Running COLMAP image_undistorter..."
+colmap image_undistorter \
+    --image_path "${SOURCE_PATH}/SeathruNeRF_dataset/${DATASET_NAME}/Images_wb" \
+    --input_path "${SOURCE_PATH}/SeathruNeRF_dataset/${DATASET_NAME}/sparse/0" \
+    --output_path "$UNDISTORTED_PATH" \
+    --output_type COLMAP
 
 
-# echo "Starting Training..."
-# ns-train water-splatting \
-#     --vis viewer \
-#     colmap \
-#     --downscale-factor 1 \
-#     --colmap-path sparse \
-#     --data "$UNDISTORTED_PATH" \
-#     --images-path images
+echo "Starting Training..."
+ns-train water-splatting \
+    --vis viewer \
+    colmap \
+    --downscale-factor 1 \
+    --colmap-path sparse \
+    --data "$UNDISTORTED_PATH" \
+    --images-path images
 
 
-ns-eval \
-    --load-config outputs/unnamed/water-splatting/2026-03-18_032402/config.yml \
-    --output-path "results_${DATASET_NAME}.json" \
-    --render-output-path "renders_${DATASET_NAME}/eval"
+# ns-eval \
+#     --load-config outputs/unnamed/water-splatting/2026-03-18_032402/config.yml \
+#     --output-path "results_${DATASET_NAME}.json" \
+#     --render-output-path "renders_${DATASET_NAME}/eval"
 
 
 echo "----------------------------------------"
