@@ -59,7 +59,7 @@ echo "colmap_path: ${SOURCE_PATH}/SeathruNeRF_dataset/${DATASET_NAME}/sparse/0"
 
 
 ns-eval \
-    --load-config outputs/unnamed/water-splatting/your_timestamp/config.yml \
+    --load-config outputs/unnamed/water-splatting/2026-03-18_032402/config.yml \
     --output-path "results_${DATASET_NAME}.json" \
     --render-output-path "renders_${DATASET_NAME}/eval"
 
