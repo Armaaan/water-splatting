@@ -50,7 +50,7 @@ echo "colmap_path: ${SOURCE_PATH}/SeathruNeRF_dataset/${DATASET_NAME}/sparse/0"
 
 echo "Starting Training..."
 ns-train water-splatting \
-    --vis viewer+wandb \
+    --vis viewer \
     colmap \
     --downscale-factor 1 \
     --colmap-path sparse \
