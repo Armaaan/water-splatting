@@ -36,6 +36,10 @@ SOURCE_PATH="/home/arua/projects/3dgs/datasets"
 DATASET_NAME="IUI3-RedSea"
 UNDISTORTED_PATH="${SOURCE_PATH}/undistorted_seathrunerf_dataset/${DATASET_NAME}"
 
+echo "output_path: $UNDISTORTED_PATH"
+echo "input_path: ${SOURCE_PATH}/SeathruNeRF_dataset/${DATASET_NAME}/Images_wb"
+echo "colmap_path: ${SOURCE_PATH}/SeathruNeRF_dataset/${DATASET_NAME}/colmap/sparse/0"
+
 echo "Running COLMAP image_undistorter..."
 colmap image_undistorter \
     --image_path "${SOURCE_PATH}/SeathruNeRF_dataset/${DATASET_NAME}/Images_wb" \
