@@ -48,14 +48,28 @@ echo "colmap_path: ${SOURCE_PATH}/SeathruNeRF_dataset/${DATASET_NAME}/sparse/0"
 #     --output_type COLMAP
 
 
-echo "Starting Training..."
-ns-train water-splatting \
-    --vis viewer \
-    colmap \
-    --downscale-factor 1 \
-    --colmap-path sparse \
-    --data "$UNDISTORTED_PATH" \
-    --images-path images
+# echo "Starting Training..."
+# ns-train water-splatting \
+#     --vis viewer \
+#     colmap \
+#     --downscale-factor 1 \
+#     --colmap-path sparse \
+#     --data "$UNDISTORTED_PATH" \
+#     --images-path images
+
+
+ns-eval \
+    --load-config outputs/unnamed/water-splatting/your_timestamp/config.yml \
+    --output-path "results_${DATASET_NAME}.json" \
+    --render-output-path "renders_${DATASET_NAME}/eval"
+
+
+echo "----------------------------------------"
+echo "FINAL METRICS FOR YOUR PAPER TABLE:"
+grep -E "psnr|ssim|lpips" "results_${DATASET_NAME}.json"
+echo "----------------------------------------"
+
+echo "Evaluation finished at: $(date)"
 
 echo "========================================"
 echo "Job finished at: $(date)"
