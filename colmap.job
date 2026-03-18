@@ -65,7 +65,7 @@ ns-eval \
 
 
 echo "----------------------------------------"
-echo "FINAL METRICS FOR YOUR PAPER TABLE:"
+echo "FINAL METRICS:"
 grep -E "psnr|ssim|lpips" "results_${DATASET_NAME}.json"
 echo "----------------------------------------"
 
